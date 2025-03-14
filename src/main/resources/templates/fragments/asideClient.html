@@ -1,0 +1,44 @@
+<aside id="left-panel" th:fragment="aside" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+                <!-- Tableau de Bord -->
+                <li>
+                    <a href="/client/dashboard"><i class="menu-icon fas fa-tachometer-alt"></i>Tableau de Bord</a>
+                </li>
+
+                <li class="menu-title"><i class="menu-icon fas fa-hard-hat"></i> Construction</li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fas fa-file-invoice"></i> Devis
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fas fa-list"></i><a href="/client/devis/list">List</a></li>
+                        <li><i class="menu-icon fas fa-plus-circle"></i><a href="/client/devis/insert">Ajout</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="menu-icon fas fa-credit-card"></i> Paiement
+                    </a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fas fa-list"></i><a href="/client/paiement/list">List</a></li>
+                        <li><i class="menu-icon fas fa-plus-circle"></i><a href="/client/paiement/insert">Ajout</a></li>
+                    </ul>
+                </li>
+
+                <!-- Bouton de déconnexion -->
+                <li class="menu-title">
+                    <i class="menu-icon fas fa-user"></i> <span>Compte</span>
+                </li>
+                <li>
+                    <a href="/authentification/deconnexion">
+                        <i class="menu-icon fas fa-sign-out-alt"></i> <span>Déconnexion</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>

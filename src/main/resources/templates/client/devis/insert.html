@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- Left Panel -->
+<aside th:replace="fragments/asideClient :: aside"></aside>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+  <header th:replace="fragments/headerClient :: header"></header>
+  <div class="clearfix"></div>
+
+  <div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+      <div class="row m-0">
+        <div class="col-sm-4">
+          <div class="page-header float-left">
+            <div class="page-title">
+              <h1>Devis</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="page-header float-right">
+            <div class="page-title">
+              <ol class="breadcrumb text-right">
+                <li><a href="#">Devis</a></li>
+                <li class="active">Insertion</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="animated fadeIn">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">Devis</strong>
+            </div>
+            <div class="card-body">
+              <!-- Devis -->
+              <div id="pay-invoice">
+                <div class="card-body">
+                  <div class="card-title">
+                    <h3 class="text-center">Insertion Devis</h3>
+                  </div>
+                  <hr>
+                  <form action="#" method="post">
+
+                    <div class="form-group">
+                      <label for="dateDebut" class="control-label mb-1">Date Début</label>
+                      <input id="dateDebut" name="dateDebut" type="date" class="form-control" required>
+                    </div>
+
+                    <!-- Sélection de la Maison -->
+                    <div class="form-group">
+                      <label class="control-label mb-1">Maison</label>
+                      <div class="d-flex flex-row flex-wrap justify-content-center">
+                        <div th:each="m : ${listMaison}" class="card p-2 mb-2 border d-flex align-items-center" style="width: 220px; margin-right: 20px;">
+
+                          <input type="radio" id="maison-[[${m.idMaison}]]" name="maison" th:value="${m.idMaison}" class="mr-2" required>
+                          <label th:for="'maison-' + ${m.idMaison}">
+                            <strong th:text="${m.type}"></strong>
+                          </label>
+                          <div class="ml-4">
+                            <p><strong>Prix:</strong> <span th:text="${m.surface}"></span> Ar</p>
+                            <p><strong>Superficie:</strong> <span th:text="${m.surface}"></span> m²</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Sélection du Type de Finition -->
+                    <div class="form-group">
+                      <label for="typeFinition" class="control-label mb-1">Type de Finition</label>
+                      <select id="typeFinition" name="typeFinition" class="form-control" required>
+                        <option value="">Sélectionner un type de finition</option>
+                        <option th:each="type : ${listTypeFinition}"
+                                th:value="${type.idType}"
+                                th:text="${type.type} +' ( * '+ ${type.pourcentage} + '%)'"></option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                        <i class="fa fa-check fa-lg"></i>&nbsp;
+                        Valider
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div> <!-- .card -->
+
+        </div><!--/.col-->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+<!-- Scripts -->
+<th:block th:replace="fragments/scripts :: scripts"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- Left Panel -->
+<aside th:replace="fragments/asideAdmin :: aside"></aside>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+  <header th:replace="fragments/headerAdmin :: header"></header>
+  <div class="clearfix"></div>
+
+  <div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+      <div class="row m-0">
+        <div class="col-sm-4">
+          <div class="page-header float-left">
+            <div class="page-title">
+              <h1>Paiement</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="page-header float-right">
+            <div class="page-title">
+              <ol class="breadcrumb text-right">
+                <li><a href="#">Paiement</a></li>
+                <li class="active">List</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="animated fadeIn">
+      <!-- Affichage du message d'alerte -->
+      <div class="container mt-3">
+        <div th:if="${message}" class="alert alert-danger alert-dismissible fade show" role="alert">
+          <span th:text="${message}"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong class="card-title">List Paiement</strong>
+              <div>
+<!--                <a href="#" class="btn btn-success">Ajouter</a>-->
+<!--                <a href="#" class="btn btn-danger">Exporter PDF</a>-->
+              </div>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                  <th>Id</th>
+                  <th>Date Paiement</th>
+                  <th>Montant</th>
+                  <th>Reference</th>
+                  <th>Devis</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="paiement : ${listPaiement}">
+                  <td th:text="${paiement.idPaiement}"></td>
+                  <td th:text="${paiement.datePaiement}"></td>
+                  <td th:text="${#numbers.formatDecimal(paiement.montant,0,'WHITESPACE',2,'COMMA')}"></td>
+                  <td th:text="${paiement.reference}"></td>
+                  <td th:text="${paiement.devis.reference+' ('+paiement.devis.lieu+')'}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+<!-- Scripts -->
+<th:block th:replace="fragments/scripts :: scripts"></th:block>
+</body>
+</html>

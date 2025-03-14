@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<!-- Left Panel -->
+<aside th:replace="fragments/asideClient :: aside"></aside>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+  <header th:replace="fragments/headerClient :: header"></header>
+  <div class="clearfix"></div>
+
+  <div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+      <div class="row m-0">
+        <div class="col-sm-4">
+          <div class="page-header float-left">
+            <div class="page-title">
+              <h1>Devis</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="page-header float-right">
+            <div class="page-title">
+              <ol class="breadcrumb text-right">
+                <li><a href="#">Devis</a></li>
+                <li><a href="#">List</a></li>
+                <li class="active">Detail</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="animated fadeIn">
+      <div class="row">
+
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">Information de la Devis</strong>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <tbody>
+                <tr>
+                  <th>Id</th>
+                  <td th:text="${devis.idDevis}"></td>
+                </tr>
+                <tr>
+                  <th>Date Devis</th>
+                  <td th:text="${devis.dateDevis}"></td>
+                </tr>
+                <tr>
+                  <th>Début Travaux</th>
+                  <td th:text="${devis.debutTravaux}"></td>
+                </tr>
+                <tr>
+                  <th>Fin Travaux</th>
+                  <td th:text="${devis.finTravaux}"></td>
+                </tr>
+                <tr>
+                  <th>Lieu</th>
+                  <td th:text="${devis.lieu}"></td>
+                </tr>
+                <tr>
+                  <th>Maison</th>
+                  <td th:text="${devis.maison.type}"></td>
+                </tr>
+                <tr>
+                  <th>Type Finition</th>
+                  <td th:text="${devis.typeFinition.type}"></td>
+                </tr>
+                <tr>
+                  <th>Référence</th>
+                  <td th:text="${devis.reference}"></td>
+                </tr>
+                <tr>
+                  <th>Montant</th>
+                  <td th:text="${#numbers.formatDecimal(devis.montant, 0, 'POINT', 2, 'COMMA')}"></td>
+                </tr>
+                <tr>
+                  <th>Montant Payé</th>
+                  <td th:text="${#numbers.formatDecimal(devis.montantPaye, 0, 'POINT', 2, 'COMMA')}"></td>
+                </tr>
+                <tr>
+                  <th>% Paiement Effectué</th>
+                  <td th:text="${#numbers.formatDecimal((devis.montantPaye / devis.montant) * 100, 0, 'POINT', 2, 'COMMA') + ' %'}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">Detail Travaux</strong>
+            </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                  <th>Code</th>
+                  <th>Description</th>
+                  <th>Unite</th>
+                  <th>Prix Unitaire</th>
+                  <th>Quantite</th>
+                  <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="travauxDevis : ${listTravaux}">
+                  <td th:text="${travauxDevis.travaux.code}"></td>
+                  <td th:text="${travauxDevis.travaux.description}"></td>
+                  <td th:text="${travauxDevis.travaux.unite.nom}"></td>
+                  <td th:text="${#numbers.formatDecimal(travauxDevis.travaux.prixUnitaire, 0, 'POINT', 2, 'COMMA')}"></td>
+                  <td th:text="${travauxDevis.quantite}"></td>
+                  <td th:text="${#numbers.formatDecimal(travauxDevis.total, 0, 'POINT', 2, 'COMMA')}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+</div>
+<!-- Scripts -->
+<th:block th:replace="fragments/scripts :: scripts"></th:block>
+</body>
+</html>

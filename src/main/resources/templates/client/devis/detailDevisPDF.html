@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      background: #f8f9fa;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Information de la Devis</h2>
+  <table>
+    <tbody>
+    <tr><th>Id</th><td th:text="${devis.idDevis}"></td></tr>
+    <tr><th>Date Devis</th><td th:text="${devis.dateDevis}"></td></tr>
+    <tr><th>Début Travaux</th><td th:text="${devis.debutTravaux}"></td></tr>
+    <tr><th>Fin Travaux</th><td th:text="${devis.finTravaux}"></td></tr>
+    <tr><th>Lieu</th><td th:text="${devis.lieu}"></td></tr>
+    <tr><th>Maison</th><td th:text="${devis.maison.type}"></td></tr>
+    <tr><th>Type Finition</th><td th:text="${devis.typeFinition.type}"></td></tr>
+    <tr><th>Référence</th><td th:text="${devis.reference}"></td></tr>
+    <tr><th>Montant</th><td th:text="${#numbers.formatDecimal(devis.montant, 0, 'POINT', 2, 'COMMA')}"></td></tr>
+    <tr><th>Montant Payé</th><td th:text="${#numbers.formatDecimal(devis.montantPaye, 0, 'POINT', 2, 'COMMA')}"></td></tr>
+    <tr><th>% Paiement Effectué</th><td th:text="${#numbers.formatDecimal((devis.montantPaye / devis.montant) * 100, 0, 'POINT', 2, 'COMMA')} + ' %'"></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Detail Travaux</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th>Unite</th>
+      <th>Prix Unitaire</th>
+      <th>Quantite</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="travauxDevis : ${listTravaux}">
+      <td th:text="${travauxDevis.travaux.code}"></td>
+      <td th:text="${travauxDevis.travaux.description}"></td>
+      <td th:text="${travauxDevis.travaux.unite.nom}"></td>
+      <td th:text="${#numbers.formatDecimal(travauxDevis.travaux.prixUnitaire, 0, 'POINT', 2, 'COMMA')}"></td>
+      <td th:text="${travauxDevis.quantite}"></td>
+      <td th:text="${#numbers.formatDecimal(travauxDevis.total, 0, 'POINT', 2, 'COMMA')}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
